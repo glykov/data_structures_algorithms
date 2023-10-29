@@ -1,0 +1,26 @@
+class Solution {
+    private int findMax(int[] ar) {
+        int currentMax = ar[0];
+        for (var value : ar) {
+            if (value > currentMax) {
+                currentMax = value;
+            }
+        }
+        return currentMax;
+    }
+
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+        int maxCandies = findMax(candies);
+        List<Boolean> result = new ArrayList<>();
+
+        for (int candy : candies) {
+            if (candy + extraCandies < maxCandies) {
+                result.add(false);
+            } else {
+                result.add(true);
+            }
+        }
+
+        return result;
+    }
+}
