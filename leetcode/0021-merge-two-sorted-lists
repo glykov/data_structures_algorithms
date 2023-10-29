@@ -1,5 +1,3 @@
-package leetcode;
-
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -37,7 +35,4 @@ class Solution {
         }
         return result.next;
     }
-}
-
-public class task_0021_mergeTwoSortedLists {
 }

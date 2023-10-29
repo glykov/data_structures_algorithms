@@ -1,0 +1,18 @@
+class Solution {
+    public String gcdOfStrings(String str1, String str2) {
+        String shorter = str1.length() <= str2.length() ? str1 : str2;
+        String longer = str1.length() > str2.length() ? str1 : str2;
+
+        // if longer does not contain shorter -> there is no repeating string
+        if (!longer.startsWith(shorter)) {
+            return "";
+        }
+
+        // if strings are same
+        if (longer.equals(shorter)) {
+            return longer;
+        }
+
+        return gcdOfStrings(longer.substring(shorter.length()), shorter);
+    }
+}
