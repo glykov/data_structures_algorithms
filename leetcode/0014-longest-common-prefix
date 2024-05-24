@@ -1,0 +1,31 @@
+class Solution {
+    private String findShortest(String[] strs) {
+        String candidate = strs[0];
+        for (var str : strs) {
+            if (str.length() < candidate.length()) {
+                candidate = str;
+            }
+        }
+        return candidate;
+    }
+    public String longestCommonPrefix(String[] strs) {
+        String prefix = findShortest(strs);
+        boolean found = false;
+
+        while (prefix.length() > 0) {
+            for (var str : strs) {
+                found = str.startsWith(prefix);
+                if (!found) {
+                    break;
+                }
+            }
+            if (!found) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+            } else {
+                return prefix;
+            }
+        }
+
+        return "";
+    }
+}
