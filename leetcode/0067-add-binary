@@ -1,0 +1,64 @@
+/*
+ * This doesn't work on strings longer than 512 symbols :-)
+ * public String addBinary(String a, String b) {
+ *      long x = Long.parseLong(a, 2);
+ *      long y = Long.parseLong(b, 2);
+ *      return Long.toBinaryString(x + y);
+ *  }
+*/
+
+class Solution {
+    public String addBinary(String a, String b) {
+        StringBuilder result;
+        StringBuilder add;
+        if (a.length() > b.length()) {
+            result = new StringBuilder(a).reverse();
+            add = new StringBuilder(b).reverse();
+        } else {
+            result = new StringBuilder(b).reverse();
+            add = new StringBuilder(a).reverse();
+        }
+
+        boolean carry = false;
+        for (int i = 0; i < add.length(); i++) {
+            if (result.charAt(i) == '1' && add.charAt(i) == '1') {
+                if (!carry) {
+                    result.setCharAt(i, '0');
+                    carry = true;
+                } else {
+                    result.setCharAt(i, '1');
+                }
+            } else if (result.charAt(i) == '1' || add.charAt(i) == '1'){
+                if (!carry) {
+                    result.setCharAt(i, '1');
+                } else {
+                    result.setCharAt(i, '0');
+                }
+            } else {
+                if (!carry) {
+                    result.setCharAt(i, '0');
+                } else {
+                    result.setCharAt(i, '1');
+                    carry = false;
+                }
+            }
+        }
+
+        int current = add.length();
+        while (current < result.length() && carry) {
+            if (result.charAt(current) == '1') {
+                result.setCharAt(current, '0');
+            } else {
+                result.setCharAt(current, '1');
+                carry = false;
+            }
+            current++;
+        }
+
+        if (carry) {
+            result.append('1');
+        }
+
+        return result.reverse().toString();
+    }
+}
