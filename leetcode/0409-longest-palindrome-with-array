@@ -1,0 +1,23 @@
+// runtime 3 ms
+class Solution {
+    public int longestPalindrome(String s) {
+        int[] charCount = new int[256];
+
+        for (int i = 0; i < s.length(); i++) {
+            charCount[s.charAt(i)]++;
+        }
+
+        int res = 0;
+        int single = 0;
+        for (var n : charCount) {
+            if ((n & 1) == 0) {
+                res += n;
+            } else {
+                res += n - 1;
+                single = 1;
+            }
+        }
+
+        return res + single;
+    }
+}
