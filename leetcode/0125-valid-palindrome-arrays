@@ -1,0 +1,25 @@
+// runtime 3 ms
+class Solution {
+    public boolean isPalindrome(String s) {
+        char[] symbols = s.toLowerCase().toCharArray();
+
+        int begin = 0;
+        int end = symbols.length - 1;
+
+        while (begin <= end) {
+            while (begin < end && !Character.isLetterOrDigit(symbols[begin])) {
+                begin++;
+            }
+            while (end > begin && !Character.isLetterOrDigit(symbols[end])) {
+                end--;
+            }
+            if (symbols[begin] != symbols[end]) {
+                return false;
+            }
+            begin++;
+            end--;
+        }
+
+        return true;
+    }
+}
