@@ -1,0 +1,30 @@
+class Solution {
+    public List<String> commonChars(String[] words) {
+        int[] ch = new int[26];
+        Arrays.fill(ch, Character.MAX_VALUE);
+        List<String> result = new ArrayList<>();
+
+        for (var word : words) {
+            int[] temp = new int[ch.length];
+            for (var letter : word.toCharArray()) {
+                temp[letter - 'a']++;
+            }
+            for (int i = 0; i < ch.length; i++) {
+                if (ch[i] > temp[i]) {
+                    ch[i] = temp[i];
+                }
+            }
+        }
+
+        for (int i = 0; i < ch.length; i++) {
+            if (ch[i] != Character.MAX_VALUE) {
+                String s = String.valueOf((char) (i + 'a'));
+                for (int j = 0; j < ch[i]; j++) {
+                    result.add(s);
+                }
+            }
+        }
+
+        return result;
+    }
+}
