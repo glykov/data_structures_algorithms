@@ -1,0 +1,27 @@
+// works very slow -> runtime 8ms 
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        Set<Integer> nodesId = new HashSet<>();
+        ListNode cur = head;
+        while (cur != null) {
+            if (nodesId.contains(cur.hashCode())) {
+                return true;
+            }
+            nodesId.add(cur.hashCode());
+            cur = cur.next;
+        }
+        return false;
+    }
+}
