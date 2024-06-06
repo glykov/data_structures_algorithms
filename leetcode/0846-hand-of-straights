@@ -1,0 +1,32 @@
+class Solution {
+    public boolean isNStraightHand(int[] hand, int groupSize) {
+        PriorityQueue<Integer> numbers = new PriorityQueue<>();
+        Map<Integer, Integer> counts = new HashMap<>();
+
+        for (int value : hand) {
+            if (counts.containsKey(value)) {
+                counts.put(value, counts.get(value) + 1);
+            } else {
+                counts.put(value, 1);
+                numbers.add(value); 
+            }
+        }
+
+        while (!numbers.isEmpty()) {
+            int number = numbers.poll();
+            int count = counts.get(number);
+            if (count == 0) {
+                continue;
+            }
+            for (int probe = number + 1; probe < number + groupSize; probe++) {
+                int probeCount = counts.getOrDefault(probe, 0);
+                if (probeCount < count) {
+                    return false;
+                }
+                counts.put(probe, probeCount - count);
+            }
+        }
+
+        return true;
+    }
+}
