@@ -1,0 +1,26 @@
+class Solution {
+    private int calculateSquares(int n) {
+        int result = 0;
+        while (n > 0) {
+            int temp = n % 10;
+            result += temp * temp;
+            n /= 10;
+        }
+        return result;
+    }
+
+    public boolean isHappy(int n) {
+        Set<Integer> numbers = new HashSet<>();
+        numbers.add(n);
+        while (true) {
+            n = calculateSquares(n);
+            if (n == 1) {
+                return true;
+            } else if (numbers.contains(n)) {
+                return false;
+            } else {
+                numbers.add(n);
+            }
+        }
+    }
+}
