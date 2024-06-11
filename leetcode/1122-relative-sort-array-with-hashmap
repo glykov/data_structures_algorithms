@@ -1,0 +1,33 @@
+// runs in 2 ms
+class Solution {
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+        Map<Integer, Integer> counts = new HashMap<>();
+
+        for (var n : arr2) {
+            counts.put(n, 0);
+        }
+
+        List<Integer> complement = new ArrayList<>();
+        for (var n : arr1) {
+            if (counts.containsKey(n)) {
+                counts.put(n, counts.get(n) + 1);
+            } else {
+                complement.add(n);
+            }
+        }
+        Collections.sort(complement);
+
+        int[] result = new int[arr1.length];
+        int index = 0;
+        for (var n : arr2) {
+            for (int i = 0; i < counts.get(n); i++) {
+                result[index++] = n;
+            }
+        }
+        for (var n : complement) {
+            result[index++] = n;
+        }
+
+        return result;
+    }
+}
