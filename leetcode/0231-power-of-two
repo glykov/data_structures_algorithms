@@ -1,0 +1,19 @@
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+        if (n <= 0) {
+            return false;
+        }
+
+        int bitCount = 0;
+        for (int i = 0; i < 32; i++) {
+            if ((n & 1) == 1) {
+                bitCount++;
+            }
+            if (bitCount > 1) {
+                return false;
+            }
+            n >>>= 1;
+        }
+        return true;
+    }
+}
